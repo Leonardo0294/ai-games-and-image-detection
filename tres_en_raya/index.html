@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tres en Raya</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.0.0/dist/tf.min.js"></script>
+</head>
+<body>
+    <h1>Tres en Raya - Juega contra la Computadora</h1>
+    <table id="board">
+        <tr>
+            <td id="cell00" onclick="playerMove(0, 0)"></td>
+            <td id="cell01" onclick="playerMove(0, 1)"></td>
+            <td id="cell02" onclick="playerMove(0, 2)"></td>
+        </tr>
+        <tr>
+            <td id="cell10" onclick="playerMove(1, 0)"></td>
+            <td id="cell11" onclick="playerMove(1, 1)"></td>
+            <td id="cell12" onclick="playerMove(1, 2)"></td>
+        </tr>
+        <tr>
+            <td id="cell20" onclick="playerMove(2, 0)"></td>
+            <td id="cell21" onclick="playerMove(2, 1)"></td>
+            <td id="cell22" onclick="playerMove(2, 2)"></td>
+        </tr>
+    </table>
+    <p id="status"></p>
+
+    <script src="game.js"></script>
+</body>
+</html>
