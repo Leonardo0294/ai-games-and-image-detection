@@ -1,62 +1,89 @@
-body {
-    background-color: #f8f9fa;
+/* styles.css */
+
+/* General Styles */
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #bb08a3;
+    font-family: 'Arial', sans-serif;
+    color: #333;
 }
 
-h1 {
-    color: #343a40;
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
-form {
-    background-color: #ffffff;
-    padding: 2rem;
+main {
+    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.btn-primary {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 600px;
     width: 100%;
-    background-color: #007bff;
-    border-color: #007bff;
 }
 
-.btn-primary[disabled] {
-    background-color: #6c757d;
-    border-color: #6c757d;
+/* Header Styles */
+h1 {
+    color: #1ad113;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.border {
-    background-color: #ffffff;
+/* Form Styles */
+form {
+    background-color: #e9ecef;
+    padding: 20px;
     border-radius: 8px;
-    padding: 2rem;
-    margin-top: 1.5rem;
 }
 
+form .form-label {
+    font-weight: bold;
+    color: #495057;
+}
+
+form .btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+    background-color: #007bff;
+    border: none;
+}
+
+form .btn-primary:disabled {
+    background-color: #6c757d;
+}
+
+/* Image Preview Styles */
 #selected-image {
-    display: block;
-    margin: 0 auto 1.5rem auto;
     max-width: 100%;
     height: auto;
+    margin-bottom: 20px;
     border-radius: 8px;
     border: 2px solid #dee2e6;
+}
+
+/* Results Styles */
+section.border {
+    background-color: #fff;
+    border-radius: 8px;
 }
 
 h2 {
     color: #343a40;
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-top: 20px;
 }
 
-table {
-    background-color: #ffffff;
+.table-responsive {
+    margin-top: 20px;
 }
 
-thead {
-    background-color: #343a40;
-    color: #ffffff;
+table thead {
+    background-color: #007bff;
+    color: #fff;
 }
 
-th, td {
-    text-align: center;
+table tbody tr:nth-child(odd) {
+    background-color: #f8f9fa;
 }

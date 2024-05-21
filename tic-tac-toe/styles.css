@@ -1,0 +1,104 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f8ff; /* Fondo azul claro */
+    font-family: Arial, sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333366; /* Azul oscuro */
+}
+
+form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+form label {
+    margin-right: 10px;
+    color: #333366; /* Azul oscuro */
+}
+
+form select {
+    max-width: 200px;
+    border-radius: 5px;
+    border: 1px solid #333366; /* Azul oscuro */
+}
+
+section {
+    width: 100%;
+}
+
+.table-responsive {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    vertical-align: middle;
+    font-size: 2em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cell:hover {
+    background-color: #e0e0e0; /* Gris claro */
+}
+
+.cell-row:nth-child(odd) .cell:nth-child(even),
+.cell-row:nth-child(even) .cell:nth-child(odd) {
+    background-color: #f0f8ff; /* Azul claro */
+}
+
+.cell-row:nth-child(odd) .cell:nth-child(odd),
+.cell-row:nth-child(even) .cell:nth-child(even) {
+    background-color: #ffffff; /* Blanco */
+}
+
+.cell:empty {
+    color: #333366; /* Azul oscuro */
+}
+
+.cell.X {
+    color: #ff6347; /* Rojo tomate */
+}
+
+.cell.O {
+    color: #4682b4; /* Azul acero */
+}
+
+.cell-row {
+    height: 100px;
+}
+
+#board.d-none {
+    display: none;
+}
