@@ -3,30 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tres en Raya</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.0.0/dist/tf.min.js"></script>
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <h1>Tres en Raya - Juega contra la Computadora</h1>
-    <table id="board">
-        <tr>
-            <td id="cell00" onclick="playerMove(0, 0)"></td>
-            <td id="cell01" onclick="playerMove(0, 1)"></td>
-            <td id="cell02" onclick="playerMove(0, 2)"></td>
-        </tr>
-        <tr>
-            <td id="cell10" onclick="playerMove(1, 0)"></td>
-            <td id="cell11" onclick="playerMove(1, 1)"></td>
-            <td id="cell12" onclick="playerMove(1, 2)"></td>
-        </tr>
-        <tr>
-            <td id="cell20" onclick="playerMove(2, 0)"></td>
-            <td id="cell21" onclick="playerMove(2, 1)"></td>
-            <td id="cell22" onclick="playerMove(2, 2)"></td>
-        </tr>
-    </table>
-    <p id="status"></p>
 
-    <script src="game.js"></script>
+<body>
+    <main class="mx-2 my-2 mx-md-5 my-md-4 px-0 px-md-4 py-1 py-md-2">
+        <h1>Jugar al tres en raya con IA</h1>
+        <form class="px-2">
+            <label for="selection" class="mb-3">
+                Seleccione el jugador:
+            </label>
+            <select
+                name="selection"
+                id="selection"
+                class="form-select"
+            >
+                <option value="" default>Seleccionar</option>
+                <option value="X">X</option>
+                <option value="O">O</option>
+            </select>
+        </form>
+        <section class="container">
+            <div
+                class="table-responsive p-5 mx-5"
+            >
+                <table
+                    class="table table-bordered text-center mx-auto"
+                >
+                    <tbody id="board" class="mx-auto d-none">
+                        <tr class="cell-row">
+                            <td class="cell" data-cell="0-0"></td>
+                            <td class="cell" data-cell="0-1"></td>
+                            <td class="cell" data-cell="0-2"></td>
+                        </tr>
+                        <tr class="cell-row">
+                            <td class="cell" data-cell="1-0"></td>
+                            <td class="cell" data-cell="1-1"></td>
+                            <td class="cell" data-cell="1-2"></td>
+                        </tr>
+                        <tr class="cell-row">
+                            <td class="cell" data-cell="2-0"></td>
+                            <td class="cell" data-cell="2-1"></td>
+                            <td class="cell" data-cell="2-2"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"> </script>
+    <script src="game.js" type="module"></script>
 </body>
+
 </html>

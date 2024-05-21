@@ -1,38 +1,72 @@
-async function detectImage(event) {
-    const file = event.target.files[0];
-    if (!file) return;
+const form = document.querySelector("form");
+const imageInput = document.querySelector("input");
+const selectedImage = document.querySelector("#selected-image");
 
-    const image = new Image();
-    const reader = new FileReader();
+async function loadModel() {
+  const model = await mobilenet.load();
+  return model;
+}
 
-    reader.onload = async function(event) {
-        image.src = event.target.result;
-        image.onload = async function() {
-            const tensor = tf.browser.fromPixels(image)
-                .resizeNearestNeighbor([224, 224])
-                .toFloat()
-                .expandDims();
+async function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
-            const modelName = 'mobilenet_v2';
-            const model = await tf.loadLayersModel(`https://tfhub.dev/google/tfjs-model/${modelName}/feature_vector/4/default/1`, { fromTFHub: true });
+async function flushDom() {
+    // Hack to flush the DOM changes to the browser
+    await delay(0);
+}
 
-            const predictions = await model.predict(tensor).data();
+async function classifyImage(model, img) {
+  const predictions = await model.classify(img);
+  return predictions;
+}
 
-            const classes = await fetch('https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v2/classes.json')
-                .then(response => response.json());
+document.addEventListener("DOMContentLoaded", async () => {
+  imageInput.addEventListener("change", handleImageChange);
+  const model = await loadModel();
+  const btn = form.querySelector("[type=submit]");
+  btn.removeAttribute("disabled");
+  btn.innerHTML = "Reconocer imagen";
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    btn.innerHTML = `
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Reconociendo imagen...
+            `;
+    btn.setAttribute("disabled", "disabled");
+    await flushDom();
+    const predictions = await handleImageUpload(model);
+    renderPredictions(predictions);
+    await flushDom();
+    btn.removeAttribute("disabled");
+    btn.innerHTML = "Reconocer imagen";
+  });
+});
 
-            const top5 = Array.from(predictions)
-                .map((prob, index) => ({ probability: prob, className: classes[index] }))
-                .sort((a, b) => b.probability - a.probability)
-                .slice(0, 5);
+function handleImageChange() {
+  const formData = new FormData(form);
+  const image = formData.get("image");
+  const url = URL.createObjectURL(image);
+  selectedImage.src = url;
+  selectedImage.width = 224;
+  selectedImage.height = 224;
+}
 
-            const resultElement = document.getElementById('result');
-            resultElement.innerHTML = `<h3>Resultados:</h3>`;
-            top5.forEach(item => {
-                resultElement.innerHTML += `<p>${item.className}: ${(item.probability * 100).toFixed(2)}%</p>`;
-            });
-        }
-    };
+async function handleImageUpload(model) {
+  const predictions = await classifyImage(model, selectedImage);
+  return predictions;
+}
 
-    reader.readAsDataURL(file);
+function renderPredictions(predictions) {
+  const predictionsList = document.querySelector("#predictions");
+  const html = predictions.map(
+    (prediction) =>
+      `
+            <tr class="">
+                <td>${prediction.className}</td>
+                <td>${prediction.probability.toFixed(4) * 100}%</td>
+            </tr>
+        `
+  );
+  predictionsList.innerHTML = html.join("");
 }
